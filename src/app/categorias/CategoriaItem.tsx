@@ -1,13 +1,8 @@
 import DropDownActions from "@/components/DropDownActions";
 import { Icon } from "@/components/Icon";
-import { Apple, ChevronDown } from "lucide-react";
 
 interface CategoriaItemProps{
-    categoria: {
-        id: number,
-        nome: string,
-        icone: string
-    }
+    categoria: Categoria
 }
 
 export function CategoriaItem(props: CategoriaItemProps) {

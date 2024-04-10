@@ -2,26 +2,16 @@ import NavBar from "@/components/NavBar"
 import { Apple, ChevronDown, Plus } from "lucide-react";
 import { CategoriaItem } from "./CategoriaItem";
 import { Button } from "@nextui-org/react";
+import Link from "next/link";
 
-export default function Categorias() {
+export default async function Categorias() {
+
+  async function getCategorias(){
+    const resp = await fetch("http://localhost:8080/categoria", { next: {revalidate: 0}})
+    return await resp.json()
+  }
   
-  const categorias = [
-    {
-      id: 1,
-      nome: "alimentação",
-      icone: "apple"
-    },
-    {
-      id: 2,
-      nome: "transporte",
-      icone: "bus"
-    },
-    {
-      id: 3,
-      nome: "educação",
-      icone: "book"
-    }
-  ]
+  const categorias : Array<Categoria> = await getCategorias()
 
   return (
     <main className="flex min-h-screen flex-col items-center">
@@ -31,7 +21,11 @@ export default function Categorias() {
 
         <div className="flex justify-between gap-4">
           <h2 className="text-2xl font-bold">Categorias Cadastradas</h2>
-          <Button color="primary" startContent={<Plus size={18} />}>nova categoria</Button>
+          <Link href="/categorias/new">
+            <Button color="primary" startContent={<Plus size={18} />}>
+              nova categoria
+            </Button>
+          </Link>
         </div>
 
         {categorias.map(categoria => <CategoriaItem categoria={categoria} /> )}
