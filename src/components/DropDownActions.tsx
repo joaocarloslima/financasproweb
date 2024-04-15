@@ -2,8 +2,13 @@
 
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 import { ChevronDown, Pencil, Trash } from "lucide-react";
+import { MouseEventHandler } from "react";
 
-export default function DropDownActions() {
+interface DropDownActionsProps {
+  onDelete: MouseEventHandler
+}
+
+export default function DropDownActions({onDelete}: DropDownActionsProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -15,7 +20,7 @@ export default function DropDownActions() {
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem key="edit" startContent={<Pencil size={18} />} >editar</DropdownItem>
-        <DropdownItem key="delete" startContent={<Trash size={18} />} className="text-danger" color="danger">
+        <DropdownItem onClick={onDelete} key="delete" startContent={<Trash size={18} />} className="text-danger" color="danger">
           apagar
         </DropdownItem>
       </DropdownMenu>

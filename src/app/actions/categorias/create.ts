@@ -20,7 +20,7 @@ export async function create(prevState: any, formData: FormData){
         }
     }
 
-    const resp = await fetch("http://localhost:8080/categoria", options)
+    const resp = await fetch(`${process.env.API_BASE_URL}/categoria`, options)
 
     if (resp.ok){
         redirect("/categorias")

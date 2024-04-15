@@ -1,12 +1,27 @@
+"use client"
+
 import DropDownActions from "@/components/DropDownActions";
 import { Icon } from "@/components/Icon";
+import { destroy } from "../actions/categorias/destroy";
+import toast from "react-hot-toast";
 
-interface CategoriaItemProps{
+interface CategoriaItemProps {
     categoria: Categoria
 }
 
 export function CategoriaItem(props: CategoriaItemProps) {
     const categoria = props.categoria
+
+    function handleDelete() {
+        toast.promise(
+            destroy(categoria.id),
+            {
+                loading: "apagando...",
+                success: "apagado com sucesso",
+                error: "erro ao apagar",
+            }
+        );
+    }
 
     return (
         <div className="flex justify-between">
@@ -14,7 +29,7 @@ export function CategoriaItem(props: CategoriaItemProps) {
                 <Icon name={categoria.icone} />
                 <span>{categoria.nome}</span>
             </div>
-            <DropDownActions />
+            <DropDownActions onDelete={handleDelete} />
         </div>
     )
 }
