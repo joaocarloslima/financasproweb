@@ -3,14 +3,10 @@ import { Apple, ChevronDown, Plus } from "lucide-react";
 import { CategoriaItem } from "./CategoriaItem";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import { getCategorias } from "../actions/categorias/get";
 
 export default async function Categorias() {
 
-  async function getCategorias(){
-    const resp = await fetch("http://localhost:8080/categoria", { next: {revalidate: 0}})
-    return await resp.json()
-  }
-  
   const categorias : Array<Categoria> = await getCategorias()
 
   return (
